@@ -1,0 +1,6 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glyph Command RTS</title><link rel="stylesheet" href="style.css">
+<main><h1>GLYPH / COMMAND</h1><p>A tiny ASCII real-time strategy game. Break the enemy headquarters.</p>
+<nav><button id="offline">Offline vs AI</button><input id="code" placeholder="Room code" aria-label="Room code" value="glyph"><button id="join">Join LAN match</button><button id="leave">Leave LAN</button></nav>
+<p id="status" role="status">Starting offline game…</p><canvas id="map" width="880" height="528" aria-label="RTS battlefield"></canvas>
+<nav><button id="worker">Train worker · 30</button><button id="soldier">Train soldier · 40</button><button id="all">Select army</button><button id="harvest">Send workers to ore</button></nav>
+<p>Left click: select; Shift click: add. Right click: move / attack / gather. W: worker, S: soldier, A: army. H: HQ, w: worker, s: soldier, $: ore, #: wall.</p><p>Blue = player 1 · orange = player 2 · yellow outline = selected. Both sides see the full map.</p></main><script type="module" src="app.mjs"></script></html>
