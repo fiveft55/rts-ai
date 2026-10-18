@@ -1,1 +1,13 @@
-{"name":"glyph-command","private":true,"type":"module","scripts":{"start":"node javascript/server.mjs","test":"node --test tests/*.test.mjs"},"engines":{"node":">=18"}}
+{
+  "name": "glyph-command",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node javascript/server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "sync:html": "node scripts/sync-html.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

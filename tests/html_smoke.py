@@ -1,4 +1,5 @@
 """Exercise Canvas RTS through a plain static server with no Node/API backend."""
+import argparse
 import socket
 import subprocess
 import time
@@ -11,17 +12,22 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     """Own a static-server/browser lifecycle and assert player-visible behavior."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--repo-root', action='store_true', help='Serve the whole checkout instead of only html/')
+    args = parser.parse_args()
+    serve_root = ROOT if args.repo_root else ROOT / 'html'
+    entry = '/html/index.html' if args.repo_root else '/index.html'
     with socket.socket() as sock:
         sock.bind(('127.0.0.1', 0))
         port = sock.getsockname()[1]
     url = f'http://127.0.0.1:{port}'
     server = subprocess.Popen(
-        ['python3', '-m', 'http.server', str(port), '--bind', '127.0.0.1', '--directory', str(ROOT)],
+        ['python3', '-m', 'http.server', str(port), '--bind', '127.0.0.1', '--directory', str(serve_root)],
         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     try:
         for _ in range(40):
             try:
-                urllib.request.urlopen(url + '/html/', timeout=1).close()
+                urllib.request.urlopen(url + entry, timeout=1).close()
                 break
             except OSError:
                 time.sleep(.1)
@@ -31,7 +37,7 @@ def main():
             errors, requests = [], []
             page.on('pageerror', lambda error: errors.append(str(error)))
             page.on('request', lambda request: requests.append((request.method, request.url)))
-            page.goto(url + '/html/index.html')
+            page.goto(url + entry)
             expect(page.locator('#clock')).to_have_text('00:01', timeout=5000)
             page.locator('#pause').click()
             expect(page.locator('#status')).to_contain_text('PAUSED')
@@ -77,10 +83,12 @@ def main():
             page.set_viewport_size({'width': 390, 'height': 844})
             assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
             page.screenshot(path=str(ROOT / 'build/html-mobile.png'), full_page=True)
+            assert any(address == url + ('/html/core.js' if args.repo_root else '/core.js') for _, address in requests), requests
+            assert not any('/javascript/' in address or '.mjs' in address for _, address in requests), requests
             assert not errors, errors
             assert requests and all(method == 'GET' and address.startswith(url + '/') for method, address in requests), requests
             browser.close()
-        print('HTML smoke: static-only loading, recruitment, selection, orders, harvesting, pause, reset and narrow layout passed')
+        print(f'HTML smoke ({"repository root" if args.repo_root else "html folder only"}): static-only loading, recruitment, selection, orders, harvesting, pause, reset and narrow layout passed')
     finally:
         server.terminate()
         server.wait(timeout=5)

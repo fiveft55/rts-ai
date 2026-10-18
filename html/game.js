@@ -1,5 +1,5 @@
 /** Static-server Canvas edition: shares rules with LAN, runs entirely offline. */
-import {createGame,command,step,ai,W,H,TICK,CAP} from '../javascript/core.mjs';
+import {createGame,command,step,ai,W,H,TICK,CAP} from './core.js';
 
 const $ = id => document.getElementById(id);
 const canvas = $('map');
