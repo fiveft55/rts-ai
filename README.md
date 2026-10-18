@@ -27,10 +27,24 @@ orange is player 2. `H` HQ, `w` worker, `s` soldier, `$` ore, `#` wall.
 Units automatically attack nearby enemies. Attack orders move toward a tile;
 they do not track a moving target. Destroy the enemy `H` to win.
 
+## HTML edition with VS Code Live Server
+
+Open this repository root in VS Code, right-click `html/index.html`, and choose
+**Open with Live Server**. This Canvas edition runs offline versus AI using only
+static files. It includes group drag selection, health bars, pause and restart;
+no Node backend or npm install is required. Keep the repository root as the
+server root so the shared `javascript/core.mjs` import resolves.
+See [HTML setup and controls](html/README.md).
+
+Alternatively, from the repository root, run
+`python3 -m http.server 5500 --bind 127.0.0.1` and open `/html/index.html` on it.
+The static edition has no LAN backend; use the host instructions below for LAN.
+
 ## Separate language directories
 
 | Directory | Role | Offline | Shared LAN host |
 | --- | --- | --- | --- |
+| `html/` | Static HTML/Canvas page for Live Server | AI opponent | Use the Node edition for LAN |
 | `javascript/` | Complete browser game, pure rules, Node authoritative host | AI opponent | Two browser players |
 | `c/` | Portable native rules and raylib 5.5 view | AI opponent | No native network transport |
 | `cpp/` | C++17 RAII entry using the C rules/view | Same native game | No native network transport |

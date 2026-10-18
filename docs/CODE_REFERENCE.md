@@ -145,3 +145,35 @@ references; avoid copying them shallowly when you require independent worlds.
 
 Test callback functions are assertions and cleanup handlers, not reusable game
 rules. Browser screenshots and compiled artifacts live only in ignored `build/`.
+
+## HTML / Live Server edition
+
+`html/index.html` defines the Canvas, HUD and accessible controls. `style.css`
+contains responsive CSS without external fonts/assets. `game.mjs` imports the
+existing pure rules from `javascript/core.mjs`; it performs no network requests.
+
+| Function/callback | Contract |
+| --- | --- |
+| `$` | Look up a page element by ID |
+| `notify` | Set time-bounded status feedback using safe text output |
+| `issue` | Submit validated player-0 intent and report rejection |
+| `recruit` | Emit a purchase and show the recruited kind |
+| `selectArmy` | Replace selection with all owned living soldier IDs |
+| `harvest` | Assign every worker its nearest nonempty ore deposit |
+| `togglePause` | Toggle simulation time and update accessible button state |
+| `restart` | Reset game, selection, pause, notices and accumulator without a new loop |
+| `position` | Convert CSS-scaled pointer coordinates into continuous grid coordinates |
+| `finishSelection` | Apply click/drag rectangle selection; preserve existing IDs with Shift |
+| `contextualOrder` | Emit gather on ore or attack-move to another tile |
+| Pointer callbacks | Capture drag, update rectangle, finish/cancel selection and focus map |
+| Keyboard callback | W/S/A/G/Space actions; preserve standard focused-button behavior |
+| Visibility callback | Clear elapsed time when tab visibility changes |
+| `glyph` | Draw local monospace text at a fixed cell center |
+| `render` | Draw grid, ore, walls, entities, health bars, selection and drag feedback |
+| `updateHUD` | Remove dead selected IDs, update changed text and enforce purchase button availability |
+| `frame` | Own one animation loop and bounded fixed-tick accumulator; stop time while paused/hidden |
+| `tests/html_smoke.py: main` | Verify actual gameplay through a plain Python static server, without Node |
+| `tests/html_smoke.py: point` | Convert test grid positions to scaled pointer coordinates |
+
+See `html/README.md` for serving-root requirements and reuse examples. The HTML
+edition is offline; the existing authoritative Node host remains the LAN option.
