@@ -109,5 +109,8 @@ with no Node backend. It verifies module loading, real recruitment/credits,
 drag-selection, contextual orders, worker income, pause, reset, keyboard controls
 and a narrow responsive layout. It rejects external resource requests and API
 writes. The runtime requires a modern browser with ES modules and Canvas; VS Code
-Live Server must serve the repository root (see `html/README.md`). Screenshots
+Live Server may serve either the repository or the self-contained `html/` folder
+(see `html/README.md`). The default browser check serves only `html/`; add
+`--repo-root` to verify full-repository serving. Run `npm run sync:html` whenever
+`javascript/core.mjs` changes; a Node test checks the committed copy is current. Screenshots
 are ignored artifacts in `build/html-desktop.png` and `build/html-mobile.png`.

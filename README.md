@@ -32,8 +32,8 @@ they do not track a moving target. Destroy the enemy `H` to win.
 Open this repository root in VS Code, right-click `html/index.html`, and choose
 **Open with Live Server**. This Canvas edition runs offline versus AI using only
 static files. It includes group drag selection, health bars, pause and restart;
-no Node backend or npm install is required. Keep the repository root as the
-server root so the shared `javascript/core.mjs` import resolves.
+no Node backend or npm install is required. The `html/` folder is self-contained,
+so Live Server can serve either that folder or the whole repository.
 See [HTML setup and controls](html/README.md).
 
 Alternatively, from the repository root, run

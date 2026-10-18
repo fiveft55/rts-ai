@@ -149,8 +149,8 @@ rules. Browser screenshots and compiled artifacts live only in ignored `build/`.
 ## HTML / Live Server edition
 
 `html/index.html` defines the Canvas, HUD and accessible controls. `style.css`
-contains responsive CSS without external fonts/assets. `game.mjs` imports the
-existing pure rules from `javascript/core.mjs`; it performs no network requests.
+contains responsive CSS without external fonts/assets. `game.js` imports local `core.js`, generated from `javascript/core.mjs` by
+`scripts/sync-html.mjs`. It performs no API requests or external resource loads.
 
 | Function/callback | Contract |
 | --- | --- |
@@ -175,5 +175,7 @@ existing pure rules from `javascript/core.mjs`; it performs no network requests.
 | `tests/html_smoke.py: main` | Verify actual gameplay through a plain Python static server, without Node |
 | `tests/html_smoke.py: point` | Convert test grid positions to scaled pointer coordinates |
 
-See `html/README.md` for serving-root requirements and reuse examples. The HTML
+The committed `html/core.js` copy makes the folder independently servable.
+`npm run sync:html` refreshes it; the portability test rejects stale copies.
+See `html/README.md` for static serving and reuse examples. The HTML
 edition is offline; the existing authoritative Node host remains the LAN option.
