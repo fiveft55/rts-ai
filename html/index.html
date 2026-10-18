@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glyph Command · Canvas RTS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <div><p class="eyebrow">ASCII STRATEGY / OFFLINE EDITION</p><h1>GLYPH COMMAND<span>Build a squad. Break the enemy line.</span></h1></div>
+    <div class="session"><span class="dot"></span> HUMAN vs AI</div>
+  </header>
+  <section class="dashboard" aria-label="Your army statistics">
+    <div><small>CREDITS</small><strong id="credits">100</strong></div>
+    <div><small>YOUR UNITS</small><strong id="population">3 / 60</strong></div>
+    <div><small>HEADQUARTERS</small><strong id="hq">180 HP</strong></div>
+    <div><small>MISSION TIME</small><strong id="clock">00:00</strong></div>
+  </section>
+  <div class="layout">
+    <section class="battlefield" aria-label="Battlefield">
+      <div class="map-heading"><span>SECTOR 01 · THE DIVIDE</span><span>40 × 24</span></div>
+      <canvas id="map" width="960" height="576" tabindex="0" aria-label="RTS map. Left click or drag to select blue units. Right click to issue orders." aria-describedby="controls">Your browser needs Canvas support to display the battlefield.</canvas>
+      <div class="map-footer"><span><i class="blue"></i> YOU</span><span><i class="orange"></i> ENEMY AI</span><span><i class="yellow"></i> ORE</span><span id="selection">0 SELECTED</span></div>
+    </section>
+    <aside>
+      <h2>COMMAND CENTER</h2>
+      <p id="status" role="status" aria-live="polite">Gather ore, grow your army, destroy the orange H.</p>
+      <h3>RECRUIT</h3>
+      <button id="worker"><span>Train worker <kbd>W</kbd></span><small>30 credits · harvests ore</small></button>
+      <button id="soldier"><span>Train soldier <kbd>S</kbd></span><small>40 credits · ranged combat</small></button>
+      <h3>SQUAD ORDERS</h3>
+      <button id="army">Select all soldiers <kbd>A</kbd></button>
+      <button id="harvest">Send workers to ore <kbd>G</kbd></button>
+      <div class="session-controls"><button id="pause">Pause <kbd>Space</kbd></button><button id="restart">New game</button></div>
+      <h3>FIELD GUIDE</h3>
+      <dl><dt>H</dt><dd>Headquarters · protect yours</dd><dt>w</dt><dd>Worker · gathers credits</dd><dt>s</dt><dd>Soldier · attacks nearby enemies</dd><dt>$</dt><dd>Ore · finite resource deposit</dd><dt>#</dt><dd>Wall · use the central passage</dd></dl>
+    </aside>
+  </div>
+  <footer id="controls"><b>LEFT CLICK</b> select · <b>DRAG</b> select a group · <b>SHIFT</b> add to selection · <b>RIGHT CLICK</b> move / attack / gather<br>Recruit workers, send them to ore, then build an army. Units fight automatically. No internet or accounts required.</footer>
+  <noscript>Enable JavaScript to play this Canvas game.</noscript>
+</main>
+<script type="module" src="game.mjs"></script>
+</body>
+</html>

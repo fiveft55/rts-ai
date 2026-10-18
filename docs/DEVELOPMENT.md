@@ -101,3 +101,13 @@ step. Scripts do not modify dependency declarations or source during setup.
 Source edits here implement the requested game as a coding task; they are not
 onboarding workarounds. Future cloud tasks should use the existing checkout;
 the cloud task is already isolated and does not need a separate Git worktree.
+
+## Static HTML/Canvas validation
+
+`python3 tests/html_smoke.py` starts only a Python static file server and Chromium,
+with no Node backend. It verifies module loading, real recruitment/credits,
+drag-selection, contextual orders, worker income, pause, reset, keyboard controls
+and a narrow responsive layout. It rejects external resource requests and API
+writes. The runtime requires a modern browser with ES modules and Canvas; VS Code
+Live Server must serve the repository root (see `html/README.md`). Screenshots
+are ignored artifacts in `build/html-desktop.png` and `build/html-mobile.png`.
